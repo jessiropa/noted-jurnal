@@ -16,47 +16,53 @@
 
     <div class="row">
         <div class="col-md-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <b>Tambah Link Referensi</b>
-                    <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
-                    <span class="pull-right panel-toggle panel-button-tab-left" id="modalFolder" onclick="create_folder()"><em class="fa fa-plus"></em></span>
-                </div>
-                <div class="panel-body">
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <h4>Folder</h4>
-                            <select class="form-control">
-                                <option>Option 1</option>
-                                <option>Option 2</option>
-                                <option>Option 3</option>
-                                <option>Option 4</option>
-                            </select>
-                        </div>
+            <form action="<?= base_url('dashboard/tambahLink') ?>" method="post">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <b>Tambah Link Referensi</b>
+                        <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
+                        <span class="pull-right panel-toggle panel-button-tab-left" id="modalFolder" onclick="create_folder()"><em class="fa fa-plus"></em></span>
                     </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <h4>Judul Artikel</h4>
-                            <input id="name" name="name" type="text" class="form-control">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h4>Folder</h4>
+                                <select class="form-control" id="folder_link" name="folder_link">
+                                    <option>Pilih Folder</option>
+                                    <?php
+                                    foreach ($folder as $f) :
+                                    ?>
+                                        <option value="<?= $f['id_folder'] ?>"><?= $f['nama_folder'] ?></option>
+                                    <?php
+                                    endforeach;
+                                    ?>
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <h4>Link artikel</h4>
-                            <input id="name" name="name" type="text" class="form-control">
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h4>Judul Artikel</h4>
+                                <input id="judul_artikel" name="judul_artikel" type="text" class="form-control">
+                            </div>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <h4>Link artikel</h4>
+                                <input id="link_artikel" name="link_artikel" type="text" class="form-control">
+                            </div>
+                        </div>
 
-                </div>
-                <div class="panel-footer">
-                    <div class="form-group">
-                        <div class="col-md-12 widget-right">
-                            <button class="btn btn-primary btn-md pull-right" id="btn-todo">Tambahkan</button>
-                        </div>
                     </div>
-                    <br>
+                    <div class="panel-footer">
+                        <div class="form-group">
+                            <div class="col-md-12 widget-right">
+                                <button class="btn btn-primary btn-md pull-right" id="btn-todo" type="submit">Tambahkan</button>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
         <div class="col-md-6">
             <div class="panel panel-default articles">
@@ -151,18 +157,50 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form>
+            <form method="post" action="<?= base_url('dashboard/tambahFolder') ?>">
+                <div class="modal-body">
+
                     <div class="form-group">
                         <label for="nama_folderlink" class="col-form-label">Nama Folder</label>
-                        <input type="text" class="form-control" id="nama_folderlink">
+                        <input type="text" class="form-control" id="nama_folderlink" name="nama_folderlink">
                     </div>
-                </form>
+
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-warning btn-md" id="edit_folder" onclick="edit_folder()" type="button">Edit Folder</button>
+                    <button type="submit" class="btn btn-primary">Tambahkan Folder</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal edit folder -->
+<div class="modal fade" id="modalEditFolder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLongTitle"><b>Edit Folder Link</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
+            <form method="post" action="<?= base_url('dashboard/tambahFolder') ?>">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="nama_folderlink" class="col-form-label">Nama Folder</label>
+                        <input type="text" class="form-control" id="nama_folderlink" name="nama_folderlink">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <!-- <button class="btn btn-warning btn-md" id="edit_folder" onclick="edit_folder()"type="button">Edit Folder</button> -->
+                    <button type="submit" class="btn btn-primary">Tambahkan Folder</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -173,7 +211,7 @@
         $("#modalCreateForlderLink").modal('show');
     }
 
-    function carierm() {
-        $("#modalCariERM").modal('show');
+    function edit_folder(){
+        $("#modalEditFolder").modal('show');
     }
 </script>
