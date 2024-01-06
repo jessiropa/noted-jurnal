@@ -75,17 +75,16 @@
                             <ul class="dropdown-menu dropdown-menu-right">
                                 <li>
                                     <ul class="dropdown-settings">
-                                        <li><a href="#">
-                                                <em class="fa fa-cog"></em> Settings 1
-                                            </a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">
-                                                <em class="fa fa-cog"></em> Settings 2
-                                            </a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">
-                                                <em class="fa fa-cog"></em> Settings 3
-                                            </a></li>
+                                        <?php
+                                        foreach ($folder as $f) :
+                                        ?>
+                                            <li><a href="<?= $f['id_folder'] ?>">
+                                                    <em class="fa fa-external-link-square"></em> <?= $f['nama_folder'] ?>
+                                                </a></li>
+                                            <li class="divider"></li>
+                                        <?php
+                                        endforeach;
+                                        ?>
                                     </ul>
                                 </li>
                             </ul>
@@ -94,53 +93,28 @@
                     <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
                 </div>
                 <div class="panel-body articles-container">
-                    <div class="article border-bottom">
-                        <div class="col-xs-12">
-                            <div class="row">
-                                <div class="col-xs-2 col-md-2 date">
-                                    <div class="large">30</div>
-                                    <div class="text-muted">Jun</div>
+                    <?php
+                    foreach ($link_all as $la) :
+                    ?>
+                        <div class="article border-bottom" data-bs-spy="scroll" class="scrollspy-example" tabindex="0">
+                            <div class="col-xs-12">
+                                <div class="row">
+                                    <div class="col-xs-2 col-md-2 date">
+                                        <!-- <div class="large">30</div> -->
+                                        <div class="" style="font-size: 15px;"><b><?= $la['tgl_create'] ?></b></div>
+                                    </div>
+                                    <div class="col-xs-10 col-md-10">
+                                        <h4><a href="<?= $la['link_artikel'] ?>"><?= $la['nama_artikel'] ?> </a></h4>
+                                    </div>
                                 </div>
-                                <div class="col-xs-10 col-md-10">
-                                    <h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div><!--End .article-->
 
-                    <div class="article border-bottom">
-                        <div class="col-xs-12">
-                            <div class="row">
-                                <div class="col-xs-2 col-md-2 date">
-                                    <div class="large">28</div>
-                                    <div class="text-muted">Jun</div>
-                                </div>
-                                <div class="col-xs-10 col-md-10">
-                                    <h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
-                                </div>
                             </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div><!--End .article-->
 
-                    <div class="article">
-                        <div class="col-xs-12">
-                            <div class="row">
-                                <div class="col-xs-2 col-md-2 date">
-                                    <div class="large">24</div>
-                                    <div class="text-muted">Jun</div>
-                                </div>
-                                <div class="col-xs-10 col-md-10">
-                                    <h4><a href="#">Lorem ipsum dolor sit amet</a></h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer at sodales nisl. Donec malesuada orci ornare risus finibus feugiat.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div><!--End .article-->
+                            <div class="clear"></div>
+                        </div><!--End .article-->
+                    <?php
+                    endforeach;
+                    ?>
                 </div>
             </div><!--End .articles-->
         </div>
@@ -211,7 +185,7 @@
         $("#modalCreateForlderLink").modal('show');
     }
 
-    function edit_folder(){
+    function edit_folder() {
         $("#modalEditFolder").modal('show');
     }
 </script>
