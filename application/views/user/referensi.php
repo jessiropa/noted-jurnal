@@ -104,7 +104,7 @@
                                         <div class="" style="font-size: 15px;"><b><?= $la['tgl_create'] ?></b></div>
                                     </div>
                                     <div class="col-xs-10 col-md-10">
-                                        <h4><a href="<?= $la['link_artikel'] ?>"><?= $la['nama_artikel'] ?> </a></h4>
+                                        <h4><a href="<?= $la['link_artikel'] ?>" style="font-size: 15px;"><?= $la['nama_artikel'] ?> </a></h4>
                                     </div>
                                 </div>
 
