@@ -17,8 +17,8 @@
     </form>
     <ul class="nav menu">
         <li><a href="<?= base_url('dashboard/'); ?>"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
-        <li><a href="<?= base_url('dashboard/target'); ?>"><em class="fa fa-navicon">&nbsp;</em> Target</a></li>
-        <li><a href="<?= base_url('dashboard/progres'); ?>"><em class="fa fa-bar-chart">&nbsp;</em> Progress</a></li>
+        <li><a href="<?= base_url('dashboard/target'); ?>"><em class="fa fa-bar-chart">&nbsp;</em> Target</a></li>
+        <li><a href="<?= base_url('dashboard/proyek'); ?>"><em class="fa fa-folder-open">&nbsp;</em> Proyek</a></li>
         <li><a href="<?= base_url('dashboard/referensi'); ?>"><em class="fa fa-link">&nbsp;</em> Link Referensi</a></li>
         <li><a href="<?= base_url('dashboard/setting'); ?>"><em class="fa fa-sliders">&nbsp;</em> Pengaturan</a></li>
         <li><a href="<?= base_url('login/') ?>"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>
