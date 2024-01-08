@@ -21,7 +21,7 @@
                     <div class="panel-heading">
                         <b>Tambah Link Referensi</b>
                         <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
-                        <span class="pull-right panel-toggle panel-button-tab-left" id="modalFolder" onclick="create_folder()"><em class="fa fa-plus"></em></span>
+                        <span class="pull-right panel-toggle panel-button-tab-left" id="modalFolder" onclick="create_folder()" style="background-color: #1E90FF;"><em class="fa fa-plus" style="color:white"></em></span>
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
