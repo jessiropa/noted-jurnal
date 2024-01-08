@@ -126,10 +126,10 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLongTitle"><b>Tambahkan Folder Link</b></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Tambahkan Folder Link</b></h4>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                </button>
+                </button> -->
             </div>
             <form method="post" action="<?= base_url('dashboard/tambahFolder') ?>">
                 <div class="modal-body">
