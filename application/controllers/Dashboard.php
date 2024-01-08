@@ -38,6 +38,17 @@ class Dashboard extends CI_Controller
         $this->load->view('templates/user_footer');
     }
 
+    public function proyek()
+    {
+        $data['judul'] = "PROYEK";
+        $this->load->view('templates/user_header', $data);
+        $this->load->view('templates/user_topnav');
+        $this->load->view('templates/user_sidebar');
+        $this->load->view('user/proyek');
+        $this->load->view('templates/user_footer');
+    }
+
+
     public function referensi()
     {
         $data['folder'] = $this->Folder_Model->getAllFolderLInk();
