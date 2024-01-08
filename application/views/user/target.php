@@ -15,95 +15,37 @@
     </div><!--/.row-->
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    To-do List
-                    <ul class="pull-right panel-settings panel-button-tab-right">
-                        <li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-                                <em class="fa fa-cogs"></em>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li>
-                                    <ul class="dropdown-settings">
-                                        <li><a href="#">
-                                                <em class="fa fa-cog"></em> Settings 1
-                                            </a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">
-                                                <em class="fa fa-cog"></em> Settings 2
-                                            </a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">
-                                                <em class="fa fa-cog"></em> Settings 3
-                                            </a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
+                    Target Saya
                     <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
+                    <span class="pull-right panel-toggle panel-button-tab-left" id="modalFolder" onclick="create_folder()" style="background-color: #1E90FF;"><em class="fa fa-plus" style="color:white"></em></span>
                 </div>
                 <div class="panel-body">
-                    <ul class="todo-list">
-
-                    </ul>
+                    <table class="table">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Nama Target</th>
+                                <th scope="col">Periode Waktu</th>
+                                <th scope="col">Progres</th>
+                                <th scope="col">Pemilik</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Judul Target</td>
+                                <td>3 bulan</td>
+                                <td>0%</td>
+                                <td>username</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="panel-footer">
-                    <div class="input-group">
-                        <input id="btn-input" type="text" class="form-control input-md" placeholder="Add new task" /><span class="input-group-btn">
-                            <button class="btn btn-primary btn-md" id="btn-todo">Add</button>
-                        </span>
-                    </div>
+                    <br>
+                    <br>
                 </div>
-            </div>
-        </div><!--/.col-->
-
-
-        <div class="col-md-6">
-            <div class="panel panel-default ">
-                <div class="panel-heading">
-                    Timeline
-                    <ul class="pull-right panel-settings panel-button-tab-right">
-                        <li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
-                                <em class="fa fa-cogs"></em>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                                <li>
-                                    <ul class="dropdown-settings">
-                                        <li><a href="#">
-                                                <em class="fa fa-cog"></em> Settings 1
-                                            </a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">
-                                                <em class="fa fa-cog"></em> Settings 2
-                                            </a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="#">
-                                                <em class="fa fa-cog"></em> Settings 3
-                                            </a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
-                </div>
-                <!-- <div class="panel-body timeline-container">
-                    <ul class="timeline">
-                        <li>
-                            <div class="timeline-badge"><em class="glyphicon glyphicon-paperclip"></em></div>
-                            <div class="timeline-panel">
-                                <div class="timeline-heading">
-                                    <h4 class="timeline-title">Lorem ipsum dolor sit amet</h4>
-                                </div>
-                                <div class="timeline-body">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div> -->
             </div>
         </div><!--/.col-->
         <div class="col-sm-12">
@@ -111,3 +53,50 @@
         </div>
     </div><!--/.row-->
 </div> <!--/.main-->
+
+
+<!-- MODAL BUAT FOLDER -->
+<div class="modal fade modal-dialog-centered" id="modalCreateForlderLink" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Tambahkan Target</b></h4>
+                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button> -->
+            </div>
+            <form method="post" action="<?= base_url('dashboard/tambahFolder') ?>">
+                <div class="modal-body">
+                    <p style="color:black;">Target apa yang ingin Kamu capai ?</p>
+                    <div class="form-group">
+                        <label for="nama_folderlink" class="col-form-label">Judul target</label>
+                        <input type="text" class="form-control" id="nama_folderlink" name="nama_folderlink">
+                    </div>
+                    <div class="form-group">
+                        <label for="nama_folderlink" class="col-form-label">Pemilik target</label>
+                        <input type="text" class="form-control" id="nama_folderlink" name="nama_folderlink">
+                    </div>
+                    <div class="form-group">
+                        <label for="nama_folderlink" class="col-form-label">Periode Waktu</label>
+                        <input type="date" class="form-control" id="nama_folderlink" name="nama_folderlink">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan Target</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- javascript -->
+<script type="text/javascript">
+    function create_folder() {
+        $("#modalCreateForlderLink").modal('show');
+    }
+
+    function edit_folder() {
+        $("#modalEditFolder").modal('show');
+    }
+</script>
