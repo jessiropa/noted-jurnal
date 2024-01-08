@@ -15,7 +15,7 @@
     </div><!--/.row-->
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <form action="<?= base_url('dashboard/tambahLink') ?>" method="post">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -64,8 +64,8 @@
                 </div>
             </form>
         </div>
-        <div class="col-md-6">
-            <div class="panel panel-default articles">
+        <div class="col-md-12">
+            <div class="panel panel-default chat">
                 <div class="panel-heading">
                     Link Referensi
                     <ul class="pull-right panel-settings panel-button-tab-right">
@@ -92,7 +92,7 @@
                     </ul>
                     <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
                 </div>
-                <div class="panel-body articles-container">
+                <div class="panel-body">
                     <?php
                     foreach ($link_all as $la) :
                     ?>
@@ -116,7 +116,11 @@
                     endforeach;
                     ?>
                 </div>
-            </div><!--End .articles-->
+                <div class="panel-footer">
+                    <br>
+                    <br>
+                </div>
+            </div>
         </div>
     </div>
 </div> <!--/.main-->
