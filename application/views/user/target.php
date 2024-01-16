@@ -38,11 +38,10 @@
                             ?>
                                 <tr>
                                     <td>
-                                        <a onclick="edit_target('<?= $at->id_target ?>')"><?= $at->nama_target; ?></a>
-                                        <!--  -->
+                                        <a data-toggle="modal" data-target="#modalEditTarget<?= $at['id_target']; ?>"> <?= $at['nama_target']; ?></a>
                                     </td>
-                                    <td><?= $at->deadline_target; ?></td>
-                                    <td><?= $at->pemilik; ?></td>
+                                    <td><?= $at['deadline_target']; ?></td>
+                                    <td><?= $at['pemilik']; ?></td>
                                 </tr>
                             <?php
                             endforeach;
@@ -99,47 +98,63 @@
 </div>
 
 <!-- EDIT TARGET -->
-<div class="modal fade modal-dialog-centered" id="modalEditTarget" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Perbarui Target</b></h4>
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button> -->
+<?php
+foreach ($all_target as $at) :
+?>
+    <div class="modal fade modal-dialog-centered" id="modalEditTarget<?= $at['id_target']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Perbarui Target</b></h4>
+                </div>
+                <form method="post" action="">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nama_target" class="col-form-label">Judul target</label>
+                            <input type="text" class="form-control" id="nama_target" name="nama_target" value="<?= $at['nama_target']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="user_target" class="col-form-label">Deskripsi target</label>
+                            <textarea class="form-control" id="deskripsi_target" rows="3" value="<?= $at['deskripsi_target']; ?>"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_target" class="col-form-label">Pemilik target</label>
+                            <input type="text" class="form-control" id="user_target" name="user_target" value="<?= $at['pemilik']; ?>" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenggat_waktu" class="col-form-label">Periode Waktu</label>
+                            <input type="date" class="form-control" id="deadline_target" name="deadline_target" value="<?= $at['deadline_target']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="tenggat_waktu" class="col-form-label">Tugas</label>
+                            <input type="target" class="form-control" id="tugas_target" name="tugas_target" value="<?= $at['tugas']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="tenggat_waktu" class="col-form-label">Proyek</label>
+                            <input type="target" class="form-control" id="proyek_target" name="proyek_target" value="<?= $at['proyek']; ?>">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan Target</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
             </div>
-            <form method="post" action="<?= base_url('dashboard/editTarget') ?>">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="nama_target" class="col-form-label">Judul target</label>
-                        <input type="text" class="form-control" id="nama_target" name="nama_target">
-                    </div>
-                    <div class="form-group">
-                        <label for="user_target" class="col-form-label">Deskripsi target</label>
-                        <textarea class="form-control" id="deskripsi_target" rows="3"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="user_target" class="col-form-label">Pemilik target</label>
-                        <input type="text" class="form-control" id="user_target" name="user_target">
-                    </div>
-                    <div class="form-group">
-                        <label for="tenggat_waktu" class="col-form-label">Periode Waktu</label>
-                        <input type="date" class="form-control" id="deadline_target" name="deadline_target">
-                    </div>
-                    <div class="form-group">
-                        <label for="tenggat_waktu" class="col-form-label">Tugas</label>
-                        <input type="target" class="form-control" id="tugas_target" name="tugas_target">
-                    </div>
-                    <div class="form-group">
-                        <label for="tenggat_waktu" class="col-form-label">Proyek</label>
-                        <input type="target" class="form-control" id="proyek_target" name="proyek_target">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Simpan Target</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                </div>
-            </form>
+        </div>
+    </div>
+<?php endforeach; ?>
+
+<div id="modalProsesPerawat" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-header">
+            <h4 class="modal-title">Proses, <br />harap menunggu ...</h4>
+        </div>
+        <div class="modal-body">
+            <iframe src="https://giphy.com/embed/jAYUbVXgESSti" width="100%" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+        </div>
+        <div class="modal-footer">
+            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>   -->
         </div>
     </div>
 </div>
@@ -148,9 +163,5 @@
 <script type="text/javascript">
     function create_target() {
         $("#modalCreateTarget").modal('show');
-    }
-
-    function edit_target() {
-        $("#modalEditTarget").modal('show');
     }
 </script>
