@@ -72,7 +72,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button> -->
             </div>
-            <form method="post" action="<?= base_url('dashboard/tambahTarget') ?>">
+            <form method="post" action="<?= base_url('target/tambahTarget') ?>">
                 <div class="modal-body">
                     <p style="color:black;">Target apa yang ingin Kamu capai ?</p>
                     <div class="form-group">
@@ -108,7 +108,7 @@ foreach ($all_target as $at) :
                 <div class="modal-header">
                     <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Perbarui Target</b></h4>
                 </div>
-                <form method="post" action="">
+                <form method="post" action="<?= base_url('target/editTarget') ?>">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nama_target" class="col-form-label">Judul target</label>
