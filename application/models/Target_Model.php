@@ -12,7 +12,7 @@ class Target_Model extends CI_Model
     // tampilkan semua data target
     function getAllDataTarget()
     {
-        return $this->db->get('target')->result();
+        return $this->db->get('target')->result_array();
     }
     function insertDataLink($data)
     {
