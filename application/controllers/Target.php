@@ -35,23 +35,23 @@ class Target extends CI_Controller
         );
 
         $this->Target_Model->insertDataTarget($data);
-        redirect(base_url('dashboard/target'));
+        redirect(base_url('target/'));
     }
 
     public function editTarget()
     {
-        $id_target = $this->input->post('id_target');
-        var_dump($id_target);
+        $nama_target = $this->input->post('nama_target');
+        $deskripsi_target = $this->input->post('deskripsi_target');
+        $deadline_target = $this->input->post('deadline_target');
+        $tugas_target = $this->input->post('tugas');
+        $proyek_target = $this->input->post('proyek');
 
-        $data_target = $this->Target_Model->getDataTargetById($id_target)->row();
-
-        $data['nama_target'] = $data_target->nama_target;
-        $data['deskripsi_target'] = $data_target->nama_target;
-        $data['pemilik'] = $data_target->pemilik;
-        $data['deadline_target'] = $data_target->deadline_target;
-        $data['tugas'] = $data_target->tugas;
-        $data['proyek'] = $data_target->proyek;
-
-        echo json_encode($data);
+        $data = array(
+            'nama_target' => $nama_target,
+            'deskripsi_target' => $deskripsi_target,
+            'deadline_target' => $deadline_target,
+            'tugas' => $tugas_target,
+            'proyek' => $proyek_target
+        );
     }
 }
