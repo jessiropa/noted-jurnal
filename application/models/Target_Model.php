@@ -22,8 +22,15 @@ class Target_Model extends CI_Model
     }
 
     // update data target
-    function updateDataTarget($data)
+    function updateDataTarget($data, $kode_target)
     {
-        // return $this->db->update('')
+        $this->db->where('id_target', $kode_target);
+        return $this->db->update('target', $data);
+    }
+
+    function deleteDataTarget($kode_target)
+    {
+        $this->db->where('id_target', $kode_target);
+        return $this->db->delete('target');
     }
 }
