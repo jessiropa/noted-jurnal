@@ -106,17 +106,23 @@ foreach ($all_target as $at) :
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Perbarui Target</b></h4>
+                    <div class="col-md-9">
+                        <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Perbarui Target</b></h4>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-danger btn-sm pull-right panel-button-tab-left" data-target="#modalHapusTarget<?= $at['id_target']; ?>">Hapus Target</button>
+                    </div>
                 </div>
                 <form method="post" action="<?= base_url('target/editTarget') ?>">
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="nama_target" class="col-form-label">Judul target</label>
+                            <input type="hidden" class="form-control" id="id_target" name="id_target" value="<?= $at['id_target']; ?>">
                             <input type="text" class="form-control" id="nama_target" name="nama_target" value="<?= $at['nama_target']; ?>">
                         </div>
                         <div class="form-group">
                             <label for="user_target" class="col-form-label">Deskripsi target</label>
-                            <textarea class="form-control" id="deskripsi_target" rows="3" value="<?= $at['deskripsi_target']; ?>"></textarea>
+                            <textarea class="form-control" type="text" id="deskripsi_target" name="deskripsi_target" rows="3"><?= $at['deskripsi_target']; ?></textarea>
                         </div>
                         <div class="form-group">
                             <label for="user_target" class="col-form-label">Pemilik target</label>
@@ -145,6 +151,30 @@ foreach ($all_target as $at) :
     </div>
 <?php endforeach; ?>
 
+<!-- konfirmasi hapus target -->
+<div class="modal fade" id="modalHapusTarget<?= $at['id_target']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Hapus <b>target</b> ini ?</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form method="post" action="<?= base_url('target/hapusTarget') ?>">
+                <input type="hidden" class="form-control" id="id_target" name="id_target" value="<?= $at['id_target']; ?>">
+                <div class="modal-body">
+                    Apakah anda yakin untuk menghapus "<b><?= $at['nama_target']; ?></b>" ?
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Hapus target</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div id="modalProsesPerawat" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-header">
@@ -159,9 +189,15 @@ foreach ($all_target as $at) :
     </div>
 </div>
 
+
+
 <!-- javascript -->
 <script type="text/javascript">
     function create_target() {
         $("#modalCreateTarget").modal('show');
+    }
+
+    function hapusTarget() {
+        $("#modalHapusTarget").modal('show');
     }
 </script>
