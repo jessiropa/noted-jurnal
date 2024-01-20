@@ -102,8 +102,8 @@
         </div>
     </div>
 </div>
-
 <!-- EDIT TARGET -->
+
 <?php
 foreach ($all_target as $at) :
 ?>
@@ -228,7 +228,7 @@ foreach ($all_target as $at) :
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="post" action="<?= base_url('target/deleteTarget') ?>">
+                <form method="post" action="<?= base_url('target/deleteProyek') ?>">
                     <input type="hidden" class="form-control" id="id_target" name="id_target" value="<?= $at['id_target']; ?>">
                     <div class="modal-body">
                         Apakah anda yakin untuk menghapus "<b><?= $at['nama_target']; ?></b>" ?
