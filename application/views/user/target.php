@@ -20,7 +20,7 @@
                 <div class="panel-heading">
                     Target Saya
                     <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
-                    <span class="pull-right panel-toggle panel-button-tab-left" id="modalFolder" onclick="create_target()" style="background-color: #1E90FF;"><em class="fa fa-plus" style="color:white"></em></span>
+                    <span class="pull-right panel-toggle panel-button-tab-left" id="modalFolder" onclick="create_target()" style="background-color: #1E90FF; cursor: pointer;"><em class="fa fa-plus" style="color:white"></em></span>
                 </div>
                 <div class="panel-body">
                     <table class="table">
