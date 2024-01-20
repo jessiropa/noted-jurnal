@@ -30,6 +30,7 @@
                                 <th scope="col">Periode Waktu</th>
                                 <!-- <th scope="col">Progres</th> -->
                                 <th scope="col">Pemilik</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -38,10 +39,15 @@
                             ?>
                                 <tr>
                                     <td>
-                                        <a data-toggle="modal" data-target="#modalEditTarget<?= $at['id_target']; ?>"> <?= $at['nama_target']; ?></a>
+                                        <?= $at['nama_target']; ?>
                                     </td>
                                     <td><?= $at['deadline_target']; ?></td>
                                     <td><?= $at['pemilik']; ?></td>
+                                    <td>
+                                        <a class="btn" data-toggle="modal" data-target="#modalDetailTarget<?= $at['id_target']; ?>"><i class="fa fa-info" aria-hidden="true" style="color:green"></i></a> |
+                                        <a class="btn" data-toggle="modal" data-target="#modalEditTarget<?= $at['id_target']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
+                                        <a class="btn" data-toggle="modal" data-target="#modalHapusTarget<?= $at['id_target']; ?>"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></a>
+                                    </td>
                                 </tr>
                             <?php
                             endforeach;
@@ -110,7 +116,9 @@ foreach ($all_target as $at) :
                         <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Perbarui Target</b></h4>
                     </div>
                     <div class="col-md-3">
-                        <button type="submit" class="btn btn-danger btn-sm pull-right panel-button-tab-left" data-target="#modalHapusTarget<?= $at['id_target']; ?>">Hapus Target</button>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </div>
                 <form method="post" action="<?= base_url('target/editTarget') ?>">
@@ -150,44 +158,92 @@ foreach ($all_target as $at) :
         </div>
     </div>
 <?php endforeach; ?>
+<!-- end edit target -->
+
+<!-- Detail Target -->
+<?php
+foreach ($all_target as $at) :
+?>
+    <div class="modal fade modal-dialog-centered" id="modalDetailTarget<?= $at['id_target']; ?>" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <div class="col-md-9">
+                        <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Target</b></h4>
+                    </div>
+                    <div class="col-md-3">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+                <form method="post" action="<?= base_url('target/editTarget') ?>">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nama_target" class="col-form-label">Judul target</label>
+                            <input type="text" class="form-control" id="nama_target" name="nama_target" value="<?= $at['nama_target']; ?>" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_target" class="col-form-label">Deskripsi target</label>
+                            <textarea class="form-control" type="text" id="deskripsi_target" name="deskripsi_target" rows="3" disabled><?= $at['deskripsi_target']; ?></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="user_target" class="col-form-label">Pemilik target</label>
+                            <input type="text" class="form-control" id="user_target" name="user_target" value="<?= $at['pemilik']; ?>" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenggat_waktu" class="col-form-label">Periode Waktu</label>
+                            <input type="date" class="form-control" id="deadline_target" name="deadline_target" value="<?= $at['deadline_target']; ?>" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenggat_waktu" class="col-form-label">Tugas</label>
+                            <input type="target" class="form-control" id="tugas_target" name="tugas_target" value="<?= $at['tugas']; ?>" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="tenggat_waktu" class="col-form-label">Proyek</label>
+                            <input type="target" class="form-control" id="proyek_target" name="proyek_target" value="<?= $at['proyek']; ?>" disabled>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- End Detail Target -->
 
 <!-- konfirmasi hapus target -->
-<div class="modal fade" id="modalHapusTarget<?= $at['id_target']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Hapus <b>target</b> ini ?</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post" action="<?= base_url('target/hapusTarget') ?>">
-                <input type="hidden" class="form-control" id="id_target" name="id_target" value="<?= $at['id_target']; ?>">
-                <div class="modal-body">
-                    Apakah anda yakin untuk menghapus "<b><?= $at['nama_target']; ?></b>" ?
+<?php
+foreach ($all_target as $at) :
+?>
+    <div class="modal fade" id="modalHapusTarget<?= $at['id_target']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Hapus <b>target</b> ini ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-primary">Hapus target</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <form method="post" action="<?= base_url('target/deleteTarget') ?>">
+                    <input type="hidden" class="form-control" id="id_target" name="id_target" value="<?= $at['id_target']; ?>">
+                    <div class="modal-body">
+                        Apakah anda yakin untuk menghapus "<b><?= $at['nama_target']; ?></b>" ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Hapus target</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
-</div>
-
-<div id="modalProsesPerawat" class="modal fade">
-    <div class="modal-dialog">
-        <div class="modal-header">
-            <h4 class="modal-title">Proses, <br />harap menunggu ...</h4>
-        </div>
-        <div class="modal-body">
-            <iframe src="https://giphy.com/embed/jAYUbVXgESSti" width="100%" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
-        </div>
-        <div class="modal-footer">
-            <!-- <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>   -->
-        </div>
-    </div>
-</div>
+<?php endforeach; ?>
+<!-- end konfirmasi hapus target -->
 
 
 
