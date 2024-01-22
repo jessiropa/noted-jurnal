@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Folder_Model extends CI_Model
+class Referensi_Model extends CI_Model
 {
     function getAllFolderLink()
     {

@@ -15,7 +15,7 @@
     </div><!--/.row-->
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-6">
             <form action="<?= base_url('dashboard/tambahLink') ?>" method="post">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -64,6 +64,55 @@
                 </div>
             </form>
         </div>
+        <div class="col-md-6">
+            <div class="panel panel-default chat">
+                <div class="panel-heading">
+                    <b>Folder Referensi</b>
+                    <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
+                </div>
+                <div class="panel-body">
+                    <div class="article border-bottom" data-bs-spy="scroll" class="scrollspy-example" tabindex="0">
+                        <div class="col-xs-12">
+                            <div class="row">
+                                <table class="table">
+                                    <!-- <thead class="thead-light"> -->
+                                    <!-- <tr>
+                                                <th scope="col">Nama Proyek</th>
+                                                <th scope="col">Tanggal dibuat proyek</th>
+                                                <th scope="col">Pemilik</th>
+                                                <th scope="col"></th>
+                                            </tr> -->
+                                    <!-- </thead> -->
+                                    <tbody>
+                                        <?php
+                                        foreach ($folder as $f) :
+                                        ?>
+                                            <tr>
+                                                <td><?= $f['nama_folder']; ?></td>
+                                                <td>
+                                                    <a class="btn pull-right" data-toggle="modal" data-target="#modalHapusFolder<?= $f['id_folder']; ?>"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></a>
+                                                    <a class="btn pull-right" data-toggle="modal" data-target="#modalEditFolder<?= $f['id_folder']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                </td>
+                                            </tr>
+                                        <?php
+                                        endforeach;
+                                        ?>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                        <div class="clear"></div>
+                    </div><!--End .article-->
+                </div>
+                <div class="panel-footer">
+                    <br>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- list link referensi -->
         <div class="col-md-12">
             <div class="panel panel-default chat">
                 <div class="panel-heading">
@@ -135,7 +184,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button> -->
             </div>
-            <form method="post" action="<?= base_url('dashboard/tambahFolder') ?>">
+            <form method="post" action="<?= base_url('referensi/tambahFolder') ?>">
                 <div class="modal-body">
 
                     <div class="form-group">
@@ -154,34 +203,71 @@
     </div>
 </div>
 
+
 <!-- Modal edit folder -->
-<div class="modal fade" id="modalEditFolder" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLongTitle"><b>Edit Folder Link</b></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post" action="<?= base_url('dashboard/tambahFolder') ?>">
-                <div class="modal-body">
+<?php
+foreach ($folder as $f) :
+?>
+    <div class="modal fade" id="modalEditFolder<?= $f['id_folder']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle"><b>Edit Folder Link</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="<?= base_url('dashboard/tambahFolder') ?>">
+                    <div class="modal-body">
 
-                    <div class="form-group">
-                        <label for="nama_folderlink" class="col-form-label">Nama Folder</label>
-                        <input type="text" class="form-control" id="nama_folderlink" name="nama_folderlink">
+                        <div class="form-group">
+                            <label for="nama_folderlink" class="col-form-label">Nama Folder</label>
+                            <input type="text" class="form-control" id="nama_folderlink" name="nama_folderlink" value="<?= $f['nama_folder']; ?>">
+                        </div>
+
                     </div>
-
-                </div>
-                <div class="modal-footer">
-                    <!-- <button class="btn btn-warning btn-md" id="edit_folder" onclick="edit_folder()"type="button">Edit Folder</button> -->
-                    <button type="submit" class="btn btn-primary">Tambahkan Folder</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <!-- <button class="btn btn-warning btn-md" id="edit_folder" onclick="edit_folder()"type="button">Edit Folder</button> -->
+                        <button type="submit" class="btn btn-primary">Tambahkan Folder</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+<?php
+endforeach;
+?>
+
+<!-- hapus folder -->
+<?php
+foreach ($folder as $f) :
+?>
+    <div class="modal fade" id="modalHapusFolder<?= $f['id_folder']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Hapus <b>proyek</b> ini ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="<?= base_url('referensi/deleteFolder') ?>">
+                    <input type="hidden" class="form-control" id="id_folder" name="id_folder" value="<?= $f['id_folder']; ?>">
+                    <div class="modal-body">
+                        Apakah anda yakin untuk menghapus "<b><?= $f['nama_folder']; ?></b>" ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Hapus proyek</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- end hapus folder -->
 
 <!-- javascript -->
 <script type="text/javascript">

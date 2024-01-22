@@ -6,14 +6,14 @@ class Referensi extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Folder_Model');
+        $this->load->model('Referensi_Model');
         $this->load->model('Target_Model');
     }
 
     public function index()
     {
-        $data['folder'] = $this->Folder_Model->getAllFolderLInk();
-        $data['link_all'] = $this->Folder_Model->getAllDataLink();
+        $data['folder'] = $this->Referensi_Model->getAllFolderLInk();
+        $data['link_all'] = $this->Referensi_Model->getAllDataLink();
         $data['judul'] = "REFERENSI";
         $this->load->view('templates/user_header', $data);
         $this->load->view('templates/user_topnav');
@@ -28,8 +28,8 @@ class Referensi extends CI_Controller
         $insertFolder = array(
             'nama_folder' => $namaFolder
         );
-        $this->Folder_Model->insertDataFolderLink($insertFolder);
-        redirect(base_url('dashboard/referensi'));
+        $this->Referensi_Model->insertDataFolderLink($insertFolder);
+        redirect(base_url('referensi/'));
     }
 
     // tambah link 
@@ -47,7 +47,7 @@ class Referensi extends CI_Controller
             'tgl_create' => date('Y-m-d')
         );
 
-        $this->Folder_Model->insertDataLink($data);
+        $this->Referensi_Model->insertDataLink($data);
         redirect(base_url('dashboard/referensi'));
     }
 }
