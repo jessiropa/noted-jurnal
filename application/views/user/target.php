@@ -146,7 +146,17 @@ foreach ($all_target as $at) :
                         </div>
                         <div class="form-group">
                             <label for="tenggat_waktu" class="col-form-label">Proyek</label>
-                            <input type="target" class="form-control" id="proyek_target" name="proyek_target" value="<?= $at['proyek']; ?>">
+                            <!-- <input type="target" class="form-control" id="proyek_target" name="proyek_target" value="<?= $at['proyek']; ?>"> -->
+                            <select class="form-control" id="folder_link" name="folder_link">
+                                <option>Pilih Proyek</option>
+                                <?php
+                                foreach ($all_proyek as $ap) :
+                                ?>
+                                    <option value="<?= $ap['id_proyek'] ?>"><?= $ap['nama_proyek'] ?></option>
+                                <?php
+                                endforeach;
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">

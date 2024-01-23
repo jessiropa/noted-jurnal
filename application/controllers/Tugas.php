@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class Target extends CI_Controller
+class Tugas extends CI_Controller
 {
     public function __construct()
     {
@@ -17,11 +17,11 @@ class Target extends CI_Controller
         $this->load->view('templates/user_header', $data);
         $this->load->view('templates/user_topnav');
         $this->load->view('templates/user_sidebar');
-        $this->load->view('user/target');
+        $this->load->view('user/tugas');
         $this->load->view('templates/user_footer');
     }
     // tambah target
-    public function tambahTarget()
+    public function tambahTugas()
     {
         date_default_timezone_set('Asia/Jakarta');
         $nama_target = $this->input->post('nama_target');

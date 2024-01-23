@@ -4,13 +4,13 @@
             <li><a href="#">
                     <em class="fa fa-folder-open"></em>
                 </a></li>
-            <li class="active">PROYEK</li>
+            <li class="active">TUGAS</li>
         </ol>
     </div><!--/.row-->
 
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">PROYEK</h1>
+            <h1 class="page-header">TUGAS</h1>
         </div>
     </div><!--/.row-->
 
@@ -18,7 +18,7 @@
         <div class="col-md-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Proyek Saya
+                    Tugas Saya
                     <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span>
                     <span class="pull-right panel-toggle panel-button-tab-left" id="modalFolder" onclick="create_proyek()" style="background-color: #1E90FF; cursor: pointer;"><em class="fa fa-plus" style="color:white"></em></span>
                 </div>
@@ -26,9 +26,8 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Nama Proyek</th>
-                                <th scope="col">Tanggal dibuat proyek</th>
-                                <th scope="col">Pemilik</th>
+                                <th scope="col">Tugas</th>
+                                <th scope="col">Deadline</th>
                                 <th scope="col"></th>
                             </tr>
                         </thead>
@@ -38,11 +37,10 @@
                             ?>
                                 <tr>
                                     <td>
-                                        <a href="<?= base_url('tugas/') ?>"><?= $ap['nama_proyek']; ?></a>
+                                        <?= $ap['nama_proyek']; ?>
                                     </td>
-                                    <td><?= $ap['create_proyek']; ?></td>
                                     <td><?= $ap['user_proyek']; ?></td>
-                                    <td><a class="btn" data-toggle="modal" data-target="#modalDetailProyek<?= $ap['id_proyek']; ?>"><i class="fa fa-info" aria-hidden="true" style="color:green"></i></a> |
+                                    <td>
                                         <a class="btn" data-toggle="modal" data-target="#modalEditProyek<?= $ap['id_proyek']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
                                         <a class="btn" data-toggle="modal" data-target="#modalHapusProyek<?= $ap['id_proyek']; ?>"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></a>
                                     </td>
@@ -65,29 +63,25 @@
     </div><!--/.row-->
 </div> <!--/.main-->
 
-<!-- Tambah Proyek -->
+<!-- Tambah Tugas -->
 <div class="modal fade modal-dialog-centered" id="modalCreateTarget" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Proyek Baru</b></h4>
-                <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Tugas Baru</b></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                </button> -->
+                </button>
             </div>
-            <form method="post" action="<?= base_url('proyek/tambahProyek') ?>">
+            <form method="post" action="<?= base_url('tugas/tambahTugas') ?>">
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="nama_target" class="col-form-label">Nama Proyek</label>
-                        <input type="text" class="form-control" id="nama_proyek" name="nama_proyek">
-                    </div>
-                    <div class="form-group">
-                        <label for="user_target" class="col-form-label">Pemilik target</label>
-                        <input type="text" class="form-control" id="user_proyek" name="user_proyek">
+                        <label for="nama_target" class="col-form-label">Nama Tugas</label>
+                        <input type="text" class="form-control" id="nama_proyek" name="nama_proyek" placeholder="Tuliskan Nama Tugas">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Simpan Target</button>
+                    <button type="submit" class="btn btn-primary">Simpan Tugas</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                 </div>
             </form>

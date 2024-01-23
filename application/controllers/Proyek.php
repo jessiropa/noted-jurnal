@@ -13,6 +13,7 @@ class Proyek extends CI_Controller
     public function index()
     {
         $data['judul'] = "PROYEK";
+        $data['all_target'] = $this->Target_Model->getAllDataTarget();
         $data['all_proyek'] = $this->Proyek_Model->getAllDataProyek();
         $this->load->view('templates/user_header', $data);
         $this->load->view('templates/user_topnav');
