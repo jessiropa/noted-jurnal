@@ -6,13 +6,16 @@ class Tugas extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('Tugas_Model');
         $this->load->model('Target_Model');
         $this->load->model('Proyek_Model');
     }
     public function index()
     {
         $data['all_target'] = $this->Target_Model->getAllDataTarget();
+        $data['all_tugas'] = $this->Tugas_Model->getAllDataTugas();
         $data['all_proyek'] = $this->Proyek_Model->getAllDataProyek();
+        $data['status_tugas'] = $this->Tugas_Model->getAllStatusTugas();
         $data['judul'] = "TARGET";
         $this->load->view('templates/user_header', $data);
         $this->load->view('templates/user_topnav');
@@ -24,45 +27,41 @@ class Tugas extends CI_Controller
     public function tambahTugas()
     {
         date_default_timezone_set('Asia/Jakarta');
-        $nama_target = $this->input->post('nama_target');
-        $user_target = $this->input->post('user_target');
-        $tenggat_waktu = $this->input->post('tenggat_waktu');
+        $nama_tugas = $this->input->post('nama_tugas');
 
         $data = array(
-            'nama_target' => $nama_target,
-            'pemilik' => $user_target,
-            'deadline_target' => $tenggat_waktu,
-            'create_target' => date('Y-m-d')
+            'nama_tugas' => $nama_tugas,
+            'create_tugas' => date('Y-m-d')
         );
 
-        $this->Target_Model->insertDataTarget($data);
-        redirect(base_url('target/'));
+        $this->Tugas_Model->insertDataTugas($data);
+        redirect(base_url('tugas/'));
     }
 
-    public function editTarget()
+    public function editTugas()
     {
-        $kode_target = $this->input->post('id_target');
-        $nama_target = $this->input->post('nama_target');
-        $deskripsi_target = $this->input->post('deskripsi_target');
-        $deadline_target = $this->input->post('deadline_target');
-        $tugas_target = $this->input->post('tugas_target');
-        $proyek_target = $this->input->post('proyek_target');
+        $kode_tugas = $this->input->post('id_tugas');
+        $nama_tugas = $this->input->post('nama_tugas');
+        $deskripsi_tugas = $this->input->post('deskripsi_tugas');
+        $deadline_tugas = $this->input->post('deadline_tugas');
+        $status_tugas = $this->input->post('status_tugas');
+        $proyek_tugas = $this->input->post('proyek_tugas');
 
         $data = array(
-            'nama_target' => $nama_target,
-            'deskripsi_target' => $deskripsi_target,
-            'deadline_target' => $deadline_target,
-            'tugas' => $tugas_target,
-            'proyek' => $proyek_target
+            'nama_tugas' => $nama_tugas,
+            'deskripsi_tugas' => $deskripsi_tugas,
+            'deadline_tugas' => $deadline_tugas,
+            'status_tugas' => $status_tugas,
+            'proyek' => $proyek_tugas
         );
-        $this->Target_Model->updateDataTarget($data, $kode_target);
-        redirect(base_url('target/'));
+        $this->Tugas_Model->updateDataTugas($data, $kode_tugas);
+        redirect(base_url('tugas/'));
     }
 
-    public function deleteTarget()
+    public function deleteTugas()
     {
-        $kode_target = $this->input->post('id_target');
-        $this->Target_Model->deleteDataTarget($kode_target);
-        redirect(base_url('target/'));
+        $kode_tugas = $this->input->post('id_tugas');
+        $this->Tugas_Model->deleteDataTugas($kode_tugas);
+        redirect(base_url('tugas/'));
     }
 }

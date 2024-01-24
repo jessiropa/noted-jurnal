@@ -3,34 +3,41 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Tugas_Model extends CI_Model
 {
 
-    // insert data target
-    function insertDataTarget($data)
+    // insert data tugas
+    function insertDataTugas($data)
     {
-        return $this->db->insert('target', $data);
+        return $this->db->insert('tugas', $data);
     }
 
-    // tampilkan semua data target
-    function getAllDataTarget()
+    // tampilkan semua data tugas
+    function getAllDataTugas()
     {
-        return $this->db->get('target')->result_array();
+        // return $this->db->get('tugas')->result_array();
+        return $this->db->query("SELECT ts.id_tugas, ts.nama_tugas, ts.deskripsi_tugas, ts.deadline_tugas, ts.proyek, ts.status_tugas, st.nama_status, pk.nama_proyek
+        FROM 
+        tugas ts 
+        LEFT JOIN status_tugas st ON st.id_st = ts.status_tugas
+        LEFT JOIN proyek pk ON pk.id_proyek = ts.proyek")->result_array();
     }
 
-    // insert data link
-    function insertDataLink($data)
+
+    // get all data status tugas 
+    function getAllStatusTugas()
     {
-        return $this->db->insert('link_referensi', $data);
+        return $this->db->get('status_tugas')->result_array();
     }
 
-    // update data target
-    function updateDataTarget($data, $kode_target)
+    // update data tugas
+    function updateDataTugas($data, $kode_tugas)
     {
-        $this->db->where('id_target', $kode_target);
-        return $this->db->update('target', $data);
+        $this->db->where('id_tugas', $kode_tugas);
+        return $this->db->update('tugas', $data);
     }
 
-    function deleteDataTarget($kode_target)
+    // delete data tugas
+    function deleteDataTugas($kode_tugas)
     {
-        $this->db->where('id_target', $kode_target);
-        return $this->db->delete('target');
+        $this->db->where('id_tugas', $kode_tugas);
+        return $this->db->delete('tugas');
     }
 }
