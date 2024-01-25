@@ -19,6 +19,7 @@
         <li><a href="<?= base_url('dashboard/'); ?>"><em class="fa fa-dashboard">&nbsp;</em> Dashboard</a></li>
         <li><a href="<?= base_url('target/'); ?>"><em class="fa fa-bar-chart">&nbsp;</em> Target</a></li>
         <li><a href="<?= base_url('proyek/'); ?>"><em class="fa fa-folder-open">&nbsp;</em> Proyek</a></li>
+        <li><a href="<?= base_url('tugas/'); ?>"><em class="fa fa-file-text">&nbsp;</em> Tugas</a></li>
         <li><a href="<?= base_url('referensi/'); ?>"><em class="fa fa-link">&nbsp;</em> Link Referensi</a></li>
         <li><a href="<?= base_url('dashboard/setting'); ?>"><em class="fa fa-sliders">&nbsp;</em> Pengaturan</a></li>
         <li><a href="<?= base_url('login/') ?>"><em class="fa fa-power-off">&nbsp;</em> Logout</a></li>

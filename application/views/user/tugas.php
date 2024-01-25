@@ -26,10 +26,11 @@
                     <table class="table">
                         <thead class="thead-light">
                             <tr>
-                                <th scope="col">Tugas</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Deadline</th>
-                                <th scope="col"></th>
+                                <th scope="col" class="text-center">Tugas</th>
+                                <th scope="col" class="text-center">Status</th>
+                                <th scope="col" class="text-center">Deadline</th>
+                                <th scope="col" class="text-center">Proyek</th>
+                                <th scope="col" class="text-center"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -37,12 +38,34 @@
                             foreach ($all_tugas as $ats) :
                             ?>
                                 <tr>
-                                    <td>
+                                    <td class="text-center">
                                         <?= $ats['nama_tugas']; ?>
                                     </td>
-                                    <td><?= $ats['nama_status']; ?></td>
-                                    <td><?= $ats['deadline_tugas']; ?></td>
                                     <td>
+                                        <?php
+                                        if ($ats['status_tugas'] == '1') {
+                                        ?>
+                                            <center style="background: green; color:white;"><?= $ats['nama_status']; ?></center>
+                                        <?php
+                                        } else if ($ats['status_tugas'] == '2') {
+                                        ?>
+                                            <center style="background: yellow; color:black;"><?= $ats['nama_status']; ?></center>
+                                        <?php
+                                        } else if ($ats['status_tugas'] == '3') {
+                                        ?>
+                                            <center style="background: blue; color:white;"><?= $ats['nama_status']; ?></center>
+                                        <?php
+                                        } else if ($ats['status_tugas'] == '4') {
+                                        ?>
+                                            <center style="background: red; color:white;"><?= $ats['nama_status']; ?></center>
+                                        <?php
+                                        }
+                                        ?>
+
+                                    </td>
+                                    <td class="text-center"><?= $ats['deadline_tugas']; ?></td>
+                                    <td class="text-center"><?= $ats['nama_proyek']; ?></td>
+                                    <td class="text-center">
                                         <a class="btn" data-toggle="modal" data-target="#modalEditTugas<?= $ats['id_tugas']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
                                         <a class="btn" data-toggle="modal" data-target="#modalHapusTugas<?= $ats['id_tugas']; ?>"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></a>
                                     </td>
@@ -66,30 +89,39 @@
 </div> <!--/.main-->
 
 <!-- Tambah Tugas -->
-<div class="modal fade modal-dialog-centered" id="modalCreateTarget" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Tugas Baru</b></h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form method="post" action="<?= base_url('tugas/tambahTugas') ?>">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="nama_target" class="col-form-label">Nama Tugas</label>
-                        <input type="text" class="form-control" id="nama_tugas" name="nama_tugas" placeholder="Tuliskan Nama Tugas">
+<?php
+foreach ($all_tugas as $ats) :
+?>
+    <div class="modal fade modal-dialog-centered" id="modalCreateTarget" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle" style="color: black;"><b>Tugas Baru</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <form method="post" action="<?= base_url('tugas/tambahTugas') ?>">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="nama_target" class="col-form-label">Nama Tugas</label>
+                            <input type="text" class="form-control" id="nama_tugas" name="nama_tugas" placeholder="Tuliskan Nama Tugas">
+                            <input type="hidden" class="form-control" id="id_proyek" name="id_proyek" value="<?= $ats['proyek']; ?>">
+                            <?php $ats['proyek']; ?>
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Simpan Tugas</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Simpan Tugas</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+<?php
+endforeach;
+?>
 <!-- End proyek -->
 
 <!-- Detail Proyek -->

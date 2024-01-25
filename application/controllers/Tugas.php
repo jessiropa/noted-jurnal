@@ -16,22 +16,54 @@ class Tugas extends CI_Controller
         $data['all_tugas'] = $this->Tugas_Model->getAllDataTugas();
         $data['all_proyek'] = $this->Proyek_Model->getAllDataProyek();
         $data['status_tugas'] = $this->Tugas_Model->getAllStatusTugas();
-        $data['judul'] = "TARGET";
+        $data['judul'] = "TUGAS";
         $this->load->view('templates/user_header', $data);
         $this->load->view('templates/user_topnav');
         $this->load->view('templates/user_sidebar');
         $this->load->view('user/tugas');
         $this->load->view('templates/user_footer');
     }
+
+    public function tugasById($id)
+    {
+        $data['all_target'] = $this->Target_Model->getAllDataTarget();
+        $data['all_tugas'] = $this->Tugas_Model->getDataTugasById($id);
+        $data['all_proyek'] = $this->Proyek_Model->getAllDataProyek();
+        $data['status_tugas'] = $this->Tugas_Model->getAllStatusTugas();
+        $data['judul'] = "TUGAS";
+        $this->load->view('templates/user_header', $data);
+        $this->load->view('templates/user_topnav');
+        $this->load->view('templates/user_sidebar');
+        $this->load->view('user/tugas', $data);
+        $this->load->view('templates/user_footer');
+    }
+
     // tambah target
     public function tambahTugas()
     {
         date_default_timezone_set('Asia/Jakarta');
         $nama_tugas = $this->input->post('nama_tugas');
 
+
         $data = array(
             'nama_tugas' => $nama_tugas,
-            'create_tugas' => date('Y-m-d')
+            'create_tugas' => date('Y-m-d'),
+            'proyek' => $proyek
+        );
+
+        $this->Tugas_Model->insertDataTugas($data);
+        redirect(base_url('tugas/'));
+    }
+    public function tambahTugasById()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $nama_tugas = $this->input->post('nama_tugas');
+        $proyek = $this->input->post('id_proyek');
+
+        $data = array(
+            'nama_tugas' => $nama_tugas,
+            'create_tugas' => date('Y-m-d'),
+            'proyek' => $proyek
         );
 
         $this->Tugas_Model->insertDataTugas($data);

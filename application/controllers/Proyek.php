@@ -8,6 +8,7 @@ class Proyek extends CI_Controller
         parent::__construct();
         $this->load->model('Target_Model');
         $this->load->model('Proyek_Model');
+        $this->load->model('Tugas_Model');
     }
 
     public function index()
@@ -15,6 +16,8 @@ class Proyek extends CI_Controller
         $data['judul'] = "PROYEK";
         $data['all_target'] = $this->Target_Model->getAllDataTarget();
         $data['all_proyek'] = $this->Proyek_Model->getAllDataProyek();
+        $data['status_proyek'] = $this->Proyek_Model->getStatusProyek();
+        $data['all_tugas'] = $this->Tugas_Model->getDataTugas();
         $this->load->view('templates/user_header', $data);
         $this->load->view('templates/user_topnav');
         $this->load->view('templates/user_sidebar');

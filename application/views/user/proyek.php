@@ -38,11 +38,12 @@
                             ?>
                                 <tr>
                                     <td>
-                                        <a href="<?= base_url('tugas/') ?>"><?= $ap['nama_proyek']; ?></a>
+                                        <a href="<?= base_url(); ?>tugas/tugasById/<?= $ap['id_proyek'] ?>"><?= $ap['nama_proyek']; ?></a>
                                     </td>
                                     <td><?= $ap['create_proyek']; ?></td>
                                     <td><?= $ap['user_proyek']; ?></td>
-                                    <td><a class="btn" data-toggle="modal" data-target="#modalDetailProyek<?= $ap['id_proyek']; ?>"><i class="fa fa-info" aria-hidden="true" style="color:green"></i></a> |
+                                    <td>
+                                        <!-- <a class="btn" data-toggle="modal" data-target="#modalDetailProyek<?= $ap['id_proyek']; ?>"><i class="fa fa-info" aria-hidden="true" style="color:green"></i></a> | -->
                                         <a class="btn" data-toggle="modal" data-target="#modalEditProyek<?= $ap['id_proyek']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
                                         <a class="btn" data-toggle="modal" data-target="#modalHapusProyek<?= $ap['id_proyek']; ?>"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></a>
                                     </td>
@@ -82,12 +83,12 @@
                         <input type="text" class="form-control" id="nama_proyek" name="nama_proyek">
                     </div>
                     <div class="form-group">
-                        <label for="user_target" class="col-form-label">Pemilik target</label>
+                        <label for="user_target" class="col-form-label">Pemilik proyek</label>
                         <input type="text" class="form-control" id="user_proyek" name="user_proyek">
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Simpan Target</button>
+                    <button type="submit" class="btn btn-primary">Simpan Proyek</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                 </div>
             </form>
@@ -226,11 +227,11 @@ foreach ($all_proyek as $ap) :
                             <label for="tenggat_waktu" class="col-form-label">Target</label>
                             <!-- <input type="text" class="form-control" id="target_proyek" name="target_proyek" value="<?= $ap['target']; ?>"> -->
                             <select class="form-control" id="target_proyek" name="target_proyek">
-                                <option>Target</option>
+                                <option>-Pilih Target-</option>
                                 <?php
                                 foreach ($all_target as $at) :
                                 ?>
-                                    <option value="<?= $at['id_target'] ?>"><?= $at['nama_target'] ?></option>
+                                    <option value="<?= $at['id_target'] ?>" <?= $at['id_target'] == $ap['target'] ? "selected" : null ?>><?= $at['nama_target'] ?></option>
                                 <?php
                                 endforeach;
                                 ?>
@@ -238,11 +239,29 @@ foreach ($all_proyek as $ap) :
                         </div>
                         <div class="form-group">
                             <label for="tenggat_waktu" class="col-form-label">Tugas</label>
-                            <input type="text" class="form-control" id="tugas_proyek" name="tugas_proyek" value="<?= $ap['tugas']; ?>">
+                            <select class="form-control" id="tugas_proyek" name="tugas_proyek">
+                                <option>-Pilih Tugas-</option>
+                                <?php
+                                foreach ($all_tugas as $tg) :
+                                ?>
+                                    <option value="<?= $tg['id_tugas'] ?>" <?= $tg['id_tugas'] == $ap['tugas'] ? "selected" : null ?>><?= $tg['nama_tugas'] ?></option>
+                                <?php
+                                endforeach;
+                                ?>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="tenggat_waktu" class="col-form-label">Status Proyek</label>
-                            <input type="text" class="form-control" id="status_proyek" name="status_proyek" value="<?= $ap['status_proyek']; ?>">
+                            <select class="form-control" id="status_proyek" name="status_proyek">
+                                <option value="0">-Pilih Status-</option>
+                                <?php
+                                foreach ($status_proyek as $sp) :
+                                ?>
+                                    <option value="<?= $sp['id_sp'] ?>" <?= $sp['id_sp'] == $ap['status_proyek'] ? "selected" : null ?>><?= $sp['nama_status'] ?></option>
+                                <?php
+                                endforeach;
+                                ?>
+                            </select>
                         </div>
                     </div>
                     <div class="modal-footer">
