@@ -48,6 +48,50 @@ class Referensi extends CI_Controller
         );
 
         $this->Referensi_Model->insertDataLink($data);
-        redirect(base_url('dashboard/referensi'));
+        redirect(base_url('referensi/'));
+    }
+
+    // edit folder 
+    public function editFolder()
+    {
+        $kode_folder = $this->input->post('id_folderlink');
+        $namaFolder = $this->input->post('nama_folderlink');
+
+        $updateFolder = array(
+            'nama_folder' => $namaFolder
+        );
+
+        $this->Referensi_Model->updateDataFolder($updateFolder, $kode_folder);
+        redirect(base_url('referensi/'));
+    }
+    // edit link
+    public function editLink()
+    {
+        $kode_link = $this->input->post('id_link');
+        $namaLink = $this->input->post('nama_artikel');
+        $linkArtikel = $this->input->post('link_artikel');
+
+        $updateLink = array(
+            'nama_artikel' => $namaLink,
+            'link_artikel' => $linkArtikel
+        );
+
+        $this->Referensi_Model->updateDataLink($updateLink, $kode_link);
+        redirect(base_url('referensi/'));
+    }
+
+    // delete folder
+    public function deleteFolder()
+    {
+        $kode_folder = $this->input->post('id_folder');
+        $this->Referensi_Model->deleteFolder($kode_folder);
+        redirect(base_url('referensi/'));
+    }
+    // delete link
+    public function deleteLink()
+    {
+        $kode_link = $this->input->post('id_link');
+        $this->Referensi_Model->deleteLink($kode_link);
+        redirect(base_url('referensi/'));
     }
 }

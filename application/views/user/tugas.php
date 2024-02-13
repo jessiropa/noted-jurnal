@@ -27,9 +27,9 @@
                         <thead class="thead-light">
                             <tr>
                                 <th scope="col" class="text-center">Tugas</th>
-                                <th scope="col" class="text-center">Status</th>
                                 <th scope="col" class="text-center">Deadline</th>
                                 <th scope="col" class="text-center">Proyek</th>
+                                <th scope="col" class="text-center">Status</th>
                                 <th scope="col" class="text-center"></th>
                             </tr>
                         </thead>
@@ -41,6 +41,8 @@
                                     <td class="text-center">
                                         <?= $ats['nama_tugas']; ?>
                                     </td>
+                                    <td class="text-center"><?= $ats['deadline_tugas']; ?></td>
+                                    <td class="text-center"><?= $ats['nama_proyek']; ?></td>
                                     <td>
                                         <?php
                                         if ($ats['status_tugas'] == '1') {
@@ -63,8 +65,6 @@
                                         ?>
 
                                     </td>
-                                    <td class="text-center"><?= $ats['deadline_tugas']; ?></td>
-                                    <td class="text-center"><?= $ats['nama_proyek']; ?></td>
                                     <td class="text-center">
                                         <a class="btn" data-toggle="modal" data-target="#modalEditTugas<?= $ats['id_tugas']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a> |
                                         <a class="btn" data-toggle="modal" data-target="#modalHapusTugas<?= $ats['id_tugas']; ?>"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></a>

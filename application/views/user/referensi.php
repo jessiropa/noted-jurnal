@@ -16,7 +16,7 @@
 
     <div class="row">
         <div class="col-md-6">
-            <form action="<?= base_url('dashboard/tambahLink') ?>" method="post">
+            <form action="<?= base_url('referensi/tambahLink') ?>" method="post">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <b>Tambah Link Referensi</b>
@@ -130,7 +130,10 @@
                                             <li><a href="<?= $f['id_folder'] ?>">
                                                     <em class="fa fa-external-link-square"></em> <?= $f['nama_folder'] ?>
                                                 </a></li>
+
+
                                             <li class="divider"></li>
+
                                         <?php
                                         endforeach;
                                         ?>
@@ -153,7 +156,12 @@
                                         <div class="" style="font-size: 15px;"><b><?= $la['tgl_create'] ?></b></div>
                                     </div>
                                     <div class="col-xs-10 col-md-10">
-                                        <h4><a href="<?= $la['link_artikel'] ?>" style="font-size: 15px;"><?= $la['nama_artikel'] ?> </a></h4>
+                                        <h4>
+                                            <a href="<?= $la['link_artikel'] ?>" style="font-size: 15px;"><?= $la['nama_artikel'] ?> </a>
+                                            <a class="btn pull-right" data-toggle="modal" data-target="#modalHapusLink<?= $la['id_link']; ?>"><i class="fa fa-trash" aria-hidden="true" style="color:red"></i></a>
+                                            <a class="btn pull-right" data-toggle="modal" data-target="#modalEditLink<?= $la['id_link']; ?>"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        </h4>
+
                                     </div>
                                 </div>
 
@@ -194,7 +202,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-warning btn-md" id="edit_folder" onclick="edit_folder()" type="button">Edit Folder</button>
+                    <!-- <button class="btn btn-warning btn-md" id="edit_folder" onclick="edit_folder()" type="button">Edit Folder</button> -->
                     <button type="submit" class="btn btn-primary">Tambahkan Folder</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                 </div>
@@ -217,18 +225,58 @@ foreach ($folder as $f) :
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form method="post" action="<?= base_url('dashboard/tambahFolder') ?>">
+                <form method="post" action="<?= base_url('referensi/editFolder') ?>">
                     <div class="modal-body">
 
                         <div class="form-group">
                             <label for="nama_folderlink" class="col-form-label">Nama Folder</label>
+                            <input type="hidden" class="form-control" id="id_folderlink" name="id_folderlink" value="<?= $f['id_folder']; ?>">
                             <input type="text" class="form-control" id="nama_folderlink" name="nama_folderlink" value="<?= $f['nama_folder']; ?>">
                         </div>
 
                     </div>
                     <div class="modal-footer">
                         <!-- <button class="btn btn-warning btn-md" id="edit_folder" onclick="edit_folder()"type="button">Edit Folder</button> -->
-                        <button type="submit" class="btn btn-primary">Tambahkan Folder</button>
+                        <button type="submit" class="btn btn-primary">Simpan Folder</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<?php
+endforeach;
+?>
+
+<!-- Modal edit link -->
+<?php
+foreach ($link_all as $la) :
+?>
+    <div class="modal fade" id="modalEditLink<?= $la['id_link']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLongTitle"><b>Edit Link Referensi</b></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="<?= base_url('referensi/editLink') ?>">
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="nama_folderlink" class="col-form-label">Judul Artikel</label>
+                            <input type="hidden" class="form-control" id="id_link" name="id_link" value="<?= $la['id_link']; ?>">
+                            <input type="text" class="form-control" id="nama_artikel" name="nama_artikel" value="<?= $la['nama_artikel']; ?>">
+                        </div>
+                        <div class="form-group">
+                            <label for="nama_folderlink" class="col-form-label">Link Artikel</label>
+                            <input type="text" class="form-control" id="link_artikel" name="link_artikel" value="<?= $la['link_artikel']; ?>">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button class="btn btn-warning btn-md" id="edit_folder" onclick="edit_folder()"type="button">Edit Folder</button> -->
+                        <button type="submit" class="btn btn-primary">Simpan Link</button>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                     </div>
                 </form>
@@ -268,6 +316,36 @@ foreach ($folder as $f) :
     </div>
 <?php endforeach; ?>
 <!-- end hapus folder -->
+
+<!-- hapus link -->
+<?php
+foreach ($link_all as $la) :
+?>
+    <div class="modal fade" id="modalHapusLink<?= $la['id_link']; ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Hapus <b>Link Referensi</b> ini ?</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form method="post" action="<?= base_url('referensi/deleteLink') ?>">
+                    <input type="hidden" class="form-control" id="id_link" name="id_link" value="<?= $la['id_link']; ?>">
+                    <div class="modal-body">
+                        Apakah anda yakin untuk menghapus "<b><?= $la['nama_artikel']; ?></b>" ?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Hapus proyek</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
+<!-- end hapus link -->
 
 <!-- javascript -->
 <script type="text/javascript">
